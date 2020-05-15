@@ -793,7 +793,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.87611234, g: 0.8773585, b: 0.6580189, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -922,6 +922,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1736458429}
     m_Modifications:
+    - target: {fileID: 5475671546683351926, guid: 3a2fe3d47c9510f44a81d161379d5a60,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475671546683351926, guid: 3a2fe3d47c9510f44a81d161379d5a60,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475671546683351926, guid: 3a2fe3d47c9510f44a81d161379d5a60,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475671546683351926, guid: 3a2fe3d47c9510f44a81d161379d5a60,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6612131012198446638, guid: 3a2fe3d47c9510f44a81d161379d5a60,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1561,6 +1581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1092446883}
   - component: {fileID: 1092446882}
+  - component: {fileID: 1092446884}
   m_Layer: 0
   m_Name: Tabuleiro
   m_TagString: Untagged
@@ -1632,6 +1653,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1092446884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092446881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e81f5528606cf541a56223abdd373cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1135739700
 PrefabInstance:
   m_ObjectHideFlags: 0
