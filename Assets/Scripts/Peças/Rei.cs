@@ -5,4 +5,10 @@ using UnityEngine;
 public class Rei : Peca
 {
 
+    private void Awake() {
+
+        movimento = new PeaoMovimento();
+
+    }
+
 }

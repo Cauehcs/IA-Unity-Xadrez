@@ -4,16 +4,15 @@ using UnityEngine;
 
 public abstract class Peca : MonoBehaviour
 {
-
+    [HideInInspector]
+    public Movimento movimento;
+        
     public Tile tile;
 
     private void OnMouseDown() {
-    
-    }
 
-    private void Start() {
-        
-        Tabuleiro.instancia.AddPecas(transform.parent.name, this);
+        Tabuleiro.instancia.tileClickado(this, transform.parent.GetComponent<Player>());
 
     }
+
 }

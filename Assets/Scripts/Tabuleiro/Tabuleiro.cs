@@ -1,26 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
+using System.Threading.Tasks;
 
-public class Tabuleiro : MonoBehaviour
-{
+public delegate void EventoTileClickado(object sender, object args);
+
+public class Tabuleiro : MonoBehaviour {
 
     public static Tabuleiro instancia;
 
     public Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
 
+    public Transform suporteDourado { get { return MaquinaDeEstados.instancia.jogador1.transform; } }
+    public Transform suporteVerde { get { return MaquinaDeEstados.instancia.jogador2.transform; } }
+
     public List<Peca> pecasDouradas = new List<Peca>();
     public List<Peca> pecasVerdes = new List<Peca>();
+
+    public EventoTileClickado tileClickado = delegate{};
+    public Peca pecaSelecionada;
+    public Highlights HighlightSelecionado;
 
     private void Awake() {
 
         instancia = this;
-        
-        CriarTabuleiro();
 
     }
 
-    void CriarTabuleiro() {
+    public async Task Load() {
+
+        PegarTimes();
+
+        await Task.Run(() => CriarTabuleiro());
+
+    }
+
+    void PegarTimes() {
+
+        pecasDouradas.AddRange(suporteDourado.GetComponentsInChildren<Peca>());
+        pecasVerdes.AddRange(suporteVerde.GetComponentsInChildren<Peca>());
+
+    }
+
+    public void CriarTabuleiro() {
         
         for (int i = 0; i < 8; i++) {
         
@@ -49,18 +72,7 @@ public class Tabuleiro : MonoBehaviour
 
         peca.tile = tiles[position];
         peca.tile.conteudo = peca;
-        
-        if(time == "Peças Douradas") {
-            
-            pecasDouradas.Add(peca);
-
-        }
-            else {
-
-                pecasVerdes.Add(peca);
-
-            }
-
+      
     }
 
 }
