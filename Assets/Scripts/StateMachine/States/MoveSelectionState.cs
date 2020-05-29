@@ -6,15 +6,24 @@ public class MoveSelectionState : State
 {
     public override void Enter()
     {
+
         Debug.Log("MoveSelectionState");
         List<Tile> moves = Board.instance.selectedPiece.movement.GetValidMoves();
         Highlights.instance.SelectTiles(moves);
-        Board.instance.tileClicked += OnHighlightClicked;
+        InputController.instance.tileClicked += OnHighlightClicked;
+        InputController.instance.returnClicked += ReturnClicked;
+
+        CollidersEnabled(false);
+
     }
     public override void Exit()
     {
         Highlights.instance.DeSelectTiles();
-        Board.instance.tileClicked -= OnHighlightClicked;
+        InputController.instance.tileClicked -= OnHighlightClicked;        
+        InputController.instance.returnClicked -= ReturnClicked;
+
+        CollidersEnabled(true);
+
     }
     void OnHighlightClicked(object sender, object args)
     {
@@ -30,4 +39,20 @@ public class MoveSelectionState : State
 
     }
 
+    void ReturnClicked(object sender, object args){
+
+        machine.ChangeTo<PieceSelectionState>();
+
+    }
+
+    void CollidersEnabled(bool value){
+
+        foreach (BoxCollider2D b in machine.currentlyPlaying.GetComponentsInChildren<BoxCollider2D>())
+        {
+            
+            b.enabled = value;
+
+        }
+
+    }
 }

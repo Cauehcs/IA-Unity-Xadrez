@@ -44,3 +44,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Canva
+    uniqueID: 352268985
+    locked: 0

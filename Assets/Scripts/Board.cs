@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public delegate void TileClickedEvent(object sender, object args);
 public class Board : MonoBehaviour
 {
     public static Board instance;
@@ -12,7 +11,6 @@ public class Board : MonoBehaviour
     public Transform greenHolder{get{return StateMachineController.instance.player2.transform;}}
     public List<Piece> goldPieces = new List<Piece>();
     public List<Piece> greenPieces = new List<Piece>();
-    public TileClickedEvent tileClicked = delegate{};
     public Piece selectedPiece;
     public HighlightClick selectedHighlight;
     void Awake(){
@@ -23,6 +21,46 @@ public class Board : MonoBehaviour
         
         await Task.Run(() => CreateBoard());
     }   
+
+    [ContextMenu("Reset Board")]
+    public void ResetBoard(){
+
+        foreach (Tile t in tiles.Values)
+        {
+
+            t.content = null;
+
+        }
+
+        foreach (Piece p in goldPieces) {
+
+            ResetPiece(p);
+
+        }
+
+        foreach (Piece p in greenPieces) {
+
+            ResetPiece(p);
+
+        }
+
+    }
+
+
+    public void ResetPiece(Piece p) {
+
+        if (!p.gameObject.activeSelf) {
+
+            return;
+
+        }
+
+        Vector2Int pos = new Vector2Int((int)p.transform.position.x, (int)p.transform.position.y);
+        tiles.TryGetValue(pos, out p.tile);
+        p.tile.content = p;
+
+    }
+
     void GetTeams(){
         goldPieces.AddRange(goldHolder.GetComponentsInChildren<Piece>());
         greenPieces.AddRange(greenHolder.GetComponentsInChildren<Piece>());

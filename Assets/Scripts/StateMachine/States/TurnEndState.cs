@@ -5,23 +5,62 @@ using System.Threading.Tasks;
 
 public class TurnEndState : State
 {
-    public override async void Enter(){
+    public override async void Enter()
+    {
         Debug.Log("Em TurnEndState: ");
-        bool gameFinished = CheckTeams();
+        bool gameFinished = CheckCoditions();
         await Task.Delay(100);
-        if(gameFinished)
+        if (gameFinished)
             machine.ChangeTo<GameEndState>();
         else
             machine.ChangeTo<TurnBeginState>();
     }
-    bool CheckTeams(){
+
+    bool CheckCoditions()
+    {
+
+        if (CheckTeams() || CheckKing())
+        {
+            return true;
+        }
+        return false;
+
+    }
+
+    bool CheckKing()
+    {
+
+        King king = Board.instance.goldHolder.GetComponentInChildren<King>();
+        if (king == null){
+
+            Debug.Log("Lado verde ganhou");
+            return true;
+
+        }
+
+        king = Board.instance.greenHolder.GetComponentInChildren<King>();
+        if (king == null){
+
+            Debug.Log("Lado dourado ganhou");
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+    bool CheckTeams()
+    {
         Piece goldPiece = Board.instance.goldPieces.Find((x) => x.gameObject.activeSelf == true);
-        if(goldPiece == null){
+        if (goldPiece == null)
+        {
             Debug.Log("Lado verde ganhou");
             return true;
         }
         Piece greenPiece = Board.instance.greenPieces.Find((x) => x.gameObject.activeSelf == true);
-        if(greenPiece == null){
+        if (greenPiece == null)
+        {
             Debug.Log("Lado dourado ganhou");
             return true;
         }

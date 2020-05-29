@@ -15,6 +15,8 @@ public class KnightMovement : Movement
         moves.AddRange(GetLMovement(new Vector2Int(1, 0)));
         moves.AddRange(GetLMovement(new Vector2Int(-1, 0)));
 
+        SetNormalMove(moves);
+
         return moves;
 
     }
